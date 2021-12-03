@@ -10,7 +10,7 @@
     }
   },
   "sentry": {
-    "dsn": "https://4f14967b33574b4697fd78160121ac1b@o128492.ingest.sentry.io/6086104"
+    "dsn": "<insert-sentry-dsn>"
   },
   "server": {
     "http": {
