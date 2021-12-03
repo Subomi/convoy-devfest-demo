@@ -1,0 +1,31 @@
+version: "3"
+
+services:
+  web:
+    image: ghcr.io/frain-dev/convoy:v0.3.0-rc.3
+    entrypoint: ["./cmd", "server", "--config", "convoy.json"]
+    ports:
+      - 5008:8080
+    volumes:
+      - ./convoy.json:/convoy.json
+    restart: on-failure
+    depends_on:
+      - mongodb
+      - redis_server
+
+  mongodb:
+    image: mongo:latest
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: rootpassword
+    volumes:
+      - ./data/mongo:/data/db
+    ports:
+      - 27017:27017
+
+  redis_server:
+    image: redis:6.2.6
+    ports:
+      - 8379:6379
+    volumes:
+      - ./data/redis:/data

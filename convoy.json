@@ -1,0 +1,61 @@
+{
+  "environment": "development",
+  "database": {
+    "dsn": "mongodb://root:rootpassword@mongodb:27017/convoy?authSource=admin"
+  },
+  "queue": {
+    "type": "redis",
+    "redis": {
+      "dsn": "redis://redis_server:6379"
+    }
+  },
+  "sentry": {
+    "dsn": "https://4f14967b33574b4697fd78160121ac1b@o128492.ingest.sentry.io/6086104"
+  },
+  "server": {
+    "http": {
+      "ssl": false,
+      "ssl_cert_file": "",
+      "ssl_key_file": "",
+      "port": 8080
+    }
+  },
+  "group": {
+    "signature": {
+      "header": "X-Convoy-Signature",
+      "hash": "SHA512"
+    },
+    "strategy": {
+      "type": "default",
+      "default": {
+        "intervalSeconds": 20,
+        "retryLimit": 3
+      }
+    },
+    "disable_endpoint": true
+  },
+  "smtp": {
+    "provider": "sendgrid",
+    "url": "smtp.sendgrid.net",
+    "port": 2525,
+    "username": "apikey",
+    "password": "<insert-sendgrid-api-key>",
+    "from": "support@frain.dev"
+  },
+  "multiple_tenants": false,
+  "auth": {
+    "require_auth": true,
+    "file": {
+      "basic": [
+        {
+          "username": "admin",
+          "password": "admin",
+          "role": {
+            "type": "super_user",
+            "groups": []
+          }
+        }
+      ]
+    }
+  }
+}
